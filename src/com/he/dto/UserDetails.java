@@ -1,18 +1,28 @@
 package com.he.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Generated;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.GenericGenerators;
+import org.hibernate.annotations.Type;
 
 @Entity
 public class UserDetails {
@@ -26,17 +36,24 @@ public class UserDetails {
 	private String dateOfBirth;
 	
 	@ElementCollection
-	private Set<Address> listOfAddresses = new HashSet<Address>();
+	@JoinTable( name="user_address",
+						joinColumns = @JoinColumn(name="user_id")
+			)
+	@GenericGenerator (name="hilo-gen", strategy="hilo")
+	@CollectionId(columns = { @Column(name="address_id") }, generator = "hilo-gen", type = @Type(type="long"))
+	private Collection<Address> listOfAddresses = new ArrayList<Address>();
 	
 	
 	
   
-	public Set<Address> getListOfAddresses() {
+	public Collection<Address> getListOfAddresses() {
 		return listOfAddresses;
 	}
+	
 	public void setListOfAddresses(Set<Address> listOfAddresses) {
 		this.listOfAddresses = listOfAddresses;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
