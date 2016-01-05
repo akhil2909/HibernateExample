@@ -18,20 +18,20 @@ public class HibernateTest {
 		UserDetails ud = new UserDetails();
 		
 		
-		ud.setUserName("Raju");
-		ud.setEmail("raju@gmail.com");
-		ud.setMobile("9751270433");
+		ud.setUserName("Ram");
+		ud.setEmail("ram@gmail.com");
+		ud.setMobile("9651270433");
 		
 		Address address = new Address();
-		address.setStreet("Street");
-		address.setCity("Hyderabad");
-		address.setState("Telangana");
-		address.setPincode("500043");		
+		address.setStreet("Street1");
+		address.setCity("Hyderabad1");
+		address.setState("Telangana1");
+		address.setPincode("500042");		
 		
 		Address address1 = new Address();
-		address1.setStreet("Street");
-		address1.setCity("Hyderabad");
-		address1.setState("Telangana");
+		address1.setStreet("Street2");
+		address1.setCity("Hyderabad2");
+		address1.setState("Telangana3");
 		address1.setPincode("500043");		
 		
 		ud.getListOfAddresses().add(address);
@@ -49,9 +49,9 @@ public class HibernateTest {
 		
 		//Retriving data from database
 		session = sessionFactory.openSession();
-		ud = (UserDetails)session.get(UserDetails.class, 1);
-		System.out.println("User Name : "+ud.getUserName() );
-
+		ud = (UserDetails)session.get(UserDetails.class, 2);
+		session.close();
+		System.out.println("address : "+ud.getListOfAddresses().size());
 	}
 
 }

@@ -52,7 +52,9 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="com.he.dto.UserDetails"/>
+        <mapping class="com.he.dto.UserDetails"/>        
+        <mapping class="com.he.dto.Students"/>
+        <mapping class="com.he.dto.Course"/>
 
     </session-factory>
 
